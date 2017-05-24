@@ -5,7 +5,7 @@ info:
     \ about Swagger at \n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net,\
     \ #swagger](http://swagger.io/irc/).\n"
   version: "1.0.0"
-  title: "Swagger Petstore"
+  title: "Swagger Petstore Edited"
   termsOfService: "http://swagger.io/terms/"
   contact:
     email: "apiteam@swagger.io"
@@ -82,6 +82,8 @@ paths:
           description: "Pet not found"
         405:
           description: "Validation exception"
+        502:
+          description: "Gone for scoops"
       security:
       - petstore_auth:
         - "write:pets"
