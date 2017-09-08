@@ -1,7 +1,7 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "The registry API for SwaggerHub",
+    "description" : "The internal registry API for SwaggerHub",
     "version" : "1.0.46",
     "title" : "SwaggerHub Registry API",
     "contact" : {
