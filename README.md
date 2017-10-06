@@ -1,8 +1,25 @@
-# Swagger Inflector
+# IO.Swagger - ASP.NET Core 1.0 Server
 
-Run with
+This is a simple API
+
+## Run
+
+Linux/OS X:
 
 ```
-mvn package jetty:run
-``
+sh build.sh
+```
 
+Windows:
+
+```
+build.bat
+```
+
+## Run in Docker
+
+```
+cd src/IO.Swagger
+docker build -t IO.Swagger .
+docker run -p 5000:5000 IO.Swagger
+```
