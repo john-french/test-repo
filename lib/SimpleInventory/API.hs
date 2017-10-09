@@ -1,6 +1,6 @@
 {-# LANGUAGE DataKinds, TypeFamilies, TypeOperators, FlexibleInstances, OverloadedStrings, ViewPatterns #-}
 {-# LANGUAGE RecordWildCards, GeneralizedNewtypeDeriving, DeriveTraversable, FlexibleContexts, DeriveGeneric #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds -fno-warn-unused-imports -fcontext-stack=302 #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds -fno-warn-unused-imports -fcontext-stack=304 #-}
 module SimpleInventory.API (
   -- * Client and Server
   ServerConfig(..),
@@ -54,6 +54,7 @@ lookupEither key assocs =
 -- | Servant type-level API, generated from the Swagger spec for SimpleInventory.
 type SimpleInventoryAPI
     =    "inventory" :> ReqBody '[JSON] InventoryItem :> Verb 'POST 200 '[JSON] () -- 'addInventory' route
+    :<|> "increment" :> Verb 'GET 200 '[JSON] () -- 'incrementGet' route
     :<|> "inventory" :> QueryParam "searchString" Text :> QueryParam "skip" Int :> QueryParam "limit" Int :> Verb 'GET 200 '[JSON] [InventoryItem] -- 'searchInventory' route
 
 -- | Server or client configuration, specifying the host and port to query or serve on.
@@ -116,6 +117,7 @@ formatSeparatedQueryList char = T.intercalate (T.singleton char) . map toQueryPa
 -- a backend, the API can be served using @runSimpleInventoryServer@.
 data SimpleInventoryBackend m = SimpleInventoryBackend {
     addInventory :: InventoryItem -> m (){- ^ Adds an item to the system -},
+    incrementGet :: m (){- ^  -},
     searchInventory :: Maybe Text -> Maybe Int -> Maybe Int -> m [InventoryItem]{- ^ By passing in the appropriate options, you can search for available inventory in the system  -}
   }
 
@@ -138,6 +140,7 @@ createSimpleInventoryClient :: SimpleInventoryBackend SimpleInventoryClient
 createSimpleInventoryClient = SimpleInventoryBackend{..}
   where
     ((coerce -> addInventory) :<|>
+     (coerce -> incrementGet) :<|>
      (coerce -> searchInventory)) = client (Proxy :: Proxy SimpleInventoryAPI)
 
 -- | Run requests in the SimpleInventoryClient monad.
@@ -160,4 +163,5 @@ runSimpleInventoryServer ServerConfig{..} backend =
     warpSettings = Warp.defaultSettings & Warp.setPort configPort & Warp.setHost (fromString configHost)
     serverFromBackend SimpleInventoryBackend{..} =
       (coerce addInventory :<|>
+       coerce incrementGet :<|>
        coerce searchInventory)
