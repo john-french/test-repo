@@ -1,0 +1,52 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a simple API1",
+    "version" : "1.0.0",
+    "title" : "Simple Inventory API",
+    "contact" : {
+      "email" : "you@your-company.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/SmartBear-CC/APIToMerge1/1.0.0",
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "Secured Admin-only calls"
+  }, {
+    "name" : "developers",
+    "description" : "Operations available to regular developers"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/inventory" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "summary" : "searches inventory changes",
+        "operationId" : "searchInventory my spec",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "schema" : {
+              "$ref" : "#/definitions/Response"
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Response" : {
+      "type" : "string"
+    }
+  }
+}
