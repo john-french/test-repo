@@ -11,7 +11,9 @@ import scala.reflect.ClassTag
 
 object EnumsSerializers {
 
-  def all = Seq[Serializer[_]]()
+  def all = Seq[Serializer[_]]() :+
+    new EnumNameSerializer(OrderEnums.Status) :+
+    new EnumNameSerializer(PetEnums.Status)
 
 
 
