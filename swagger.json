@@ -3,6 +3,9 @@
   "servers" : [ {
     "description" : "SwaggerHub API Auto Mocking",
     "url" : "https://dev-virtserver.swaggerhub.com/JFORG/OAS3/1.0.0"
+  }, {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://dev-virtserver.swaggerhub.com/JFORG/OAS3/1.0.1"
   } ],
   "info" : {
     "description" : "This is a sample Petstore server.  Hello. You can find\nout more about Swagger at\n[http://swagger.io](http://swagger.io) or on\n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
