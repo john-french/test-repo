@@ -17,7 +17,8 @@ case class Pet (
   photoUrls: Seq[String],
   tags: Option[Seq[Tag]],
   /* pet status in the store */
-  status: Option[PetEnums.Status]
+  status: Option[PetEnums.Status],
+  nick: Option[NickName]
 ) extends ApiModel
 
 object PetEnums {

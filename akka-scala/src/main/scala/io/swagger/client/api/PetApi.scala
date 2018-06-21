@@ -7,6 +7,7 @@ package io.swagger.client.api
 
 import io.swagger.client.model.ApiResponse
 import java.io.File
+import io.swagger.client.model.NickName
 import io.swagger.client.model.Pet
 import io.swagger.client.core._
 import io.swagger.client.core.CollectionFormats._
@@ -22,7 +23,7 @@ object PetApi {
    * 
    * @param body Pet object that needs to be added to the store
    */
-  def addPet(body: Pet): ApiRequest[Unit] =
+  def addPet(body: NickName): ApiRequest[Unit] =
     ApiRequest[Unit](ApiMethods.POST, "http://petstore.swagger.io/v2", "/pet", "application/json")
       .withBody(body)
       .withErrorResponse[Unit](405)
